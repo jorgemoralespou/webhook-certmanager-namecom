@@ -19,3 +19,6 @@ cert-manager-webhook-example
 bin
 _out
 _test
+
+# Claude directory
+.claude
