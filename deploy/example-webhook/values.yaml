@@ -1,0 +1,34 @@
+# groupName must be a unique domain owned by the webhook author.
+# It is used to avoid naming conflicts on the Kubernetes API and must match
+# the groupName referenced in each Issuer's webhook stanza.
+groupName: acme.namecom.io
+
+certManager:
+  namespace: cert-manager
+  serviceAccountName: cert-manager
+
+image:
+  repository: ghcr.io/jorgemoralespou/webhook-certmanager-namecom
+  tag: latest
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 443
+
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

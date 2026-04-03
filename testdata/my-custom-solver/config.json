@@ -1,0 +1,7 @@
+{
+  "username": "your-namecom-username",
+  "apiTokenSecretRef": {
+    "name": "namecom-credentials",
+    "key": "api-token"
+  }
+}
