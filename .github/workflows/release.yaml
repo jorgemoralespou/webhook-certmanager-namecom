@@ -90,7 +90,7 @@ jobs:
           sed -i "s|tag:.*|tag: \"${VERSION}\"|" deploy/example-webhook/values.yaml
 
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v2.0.0
+        uses: helm/chart-releaser-action@v1
         with:
           charts_dir: deploy
           skip_existing: true
