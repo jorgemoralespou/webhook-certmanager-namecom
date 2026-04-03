@@ -83,8 +83,7 @@ jobs:
             IMAGE_TAG="${VERSION}"
           else
             BASE=$(grep '^version:' deploy/example-webhook/Chart.yaml | awk '{print $2}')
-            SHORT_SHA=$(git rev-parse --short HEAD)
-            VERSION="${BASE}-dev.${SHORT_SHA}"
+            VERSION="${BASE}-dev.${{ github.run_number }}"
             IMAGE_TAG="latest"
           fi
           sed -i "s/^version:.*/version: ${VERSION}/" deploy/example-webhook/Chart.yaml
