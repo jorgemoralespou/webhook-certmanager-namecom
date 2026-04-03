@@ -24,10 +24,30 @@ helm repo update
 
 ### 2. Install the webhook
 
+Install the latest stable release:
+
 ```bash
 helm install cert-manager-webhook-namecom webhook-namecom/cert-manager-webhook-namecom \
   --namespace cert-manager \
   --set groupName=acme.namecom.io
+```
+
+To install a specific version:
+
+```bash
+helm install cert-manager-webhook-namecom webhook-namecom/cert-manager-webhook-namecom \
+  --namespace cert-manager \
+  --set groupName=acme.namecom.io \
+  --version 1.2.3
+```
+
+To install the latest development build (published on every commit to `main`):
+
+```bash
+helm install cert-manager-webhook-namecom webhook-namecom/cert-manager-webhook-namecom \
+  --namespace cert-manager \
+  --set groupName=acme.namecom.io \
+  --devel
 ```
 
 The `groupName` must be a unique domain identifier you control. It is baked into the webhook and must match the value referenced in each Issuer configuration.
