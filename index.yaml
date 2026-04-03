@@ -24,6 +24,28 @@ entries:
     - https://github.com/jorgemoralespou/webhook-certmanager-namecom/releases/download/cert-manager-webhook-namecom-0.1.0-dev.8e176ca/cert-manager-webhook-namecom-0.1.0-dev.8e176ca.tgz
     version: 0.1.0-dev.8e176ca
   - apiVersion: v2
+    appVersion: 0.1.0-dev.63b2804
+    created: "2026-04-03T15:47:53.884182811Z"
+    description: A cert-manager ACME DNS01 webhook solver for name.com
+    digest: 0b842649d33fa056e879c8911dd03129833bbdfbebface05ab2d0378009cf1f7
+    home: https://github.com/jorgemoralespou/webhook-certmanager-namecom
+    keywords:
+    - cert-manager
+    - namecom
+    - name.com
+    - dns01
+    - acme
+    maintainers:
+    - name: Jorge Morales Pou
+      url: https://github.com/jorgemoralespou
+    name: cert-manager-webhook-namecom
+    sources:
+    - https://github.com/jorgemoralespou/webhook-certmanager-namecom
+    type: application
+    urls:
+    - https://github.com/jorgemoralespou/webhook-certmanager-namecom/releases/download/cert-manager-webhook-namecom-0.1.0-dev.63b2804/cert-manager-webhook-namecom-0.1.0-dev.63b2804.tgz
+    version: 0.1.0-dev.63b2804
+  - apiVersion: v2
     appVersion: 0.1.0-dev.254f1b3
     created: "2026-04-03T15:46:56.042569139Z"
     description: A cert-manager ACME DNS01 webhook solver for name.com
@@ -45,4 +67,4 @@ entries:
     urls:
     - https://github.com/jorgemoralespou/webhook-certmanager-namecom/releases/download/cert-manager-webhook-namecom-0.1.0-dev.254f1b3/cert-manager-webhook-namecom-0.1.0-dev.254f1b3.tgz
     version: 0.1.0-dev.254f1b3
-generated: "2026-04-03T15:46:56.042586081Z"
+generated: "2026-04-03T15:47:53.884208348Z"
