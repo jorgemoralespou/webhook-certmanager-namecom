@@ -15,22 +15,13 @@ A [cert-manager](https://cert-manager.io) ACME DNS01 webhook solver for [name.co
 
 ## Installation
 
-### 1. Add the Helm repository
+The chart is published to two registries — use whichever suits your workflow.
+
+### Option A: HTTP Helm repository (gh-pages)
 
 ```bash
 helm repo add webhook-namecom https://jorgemoral.es/webhook-certmanager-namecom
 helm repo update
-```
-
-### 2. Install the webhook
-
-By default the webhook can only read Secrets from the `cert-manager` namespace. If your credentials Secret lives elsewhere (e.g. cert-manager's `clusterResourceNamespace`), pass the namespace via `secretNamespaces`:
-
-```bash
-helm install cert-manager-webhook-namecom webhook-namecom/cert-manager-webhook-namecom \
-  --namespace cert-manager \
-  --set groupName=acme.namecom.io \
-  --set "secretNamespaces={cert-manager,educates-secrets}"
 ```
 
 Install the latest stable release:
@@ -41,7 +32,7 @@ helm install cert-manager-webhook-namecom webhook-namecom/cert-manager-webhook-n
   --set groupName=acme.namecom.io
 ```
 
-To install a specific version:
+Install a specific version:
 
 ```bash
 helm install cert-manager-webhook-namecom webhook-namecom/cert-manager-webhook-namecom \
@@ -50,13 +41,53 @@ helm install cert-manager-webhook-namecom webhook-namecom/cert-manager-webhook-n
   --version 1.2.3
 ```
 
-To install the latest development build (published on every commit to `main`):
+Install the latest development build (published on every commit to `main`):
 
 ```bash
 helm install cert-manager-webhook-namecom webhook-namecom/cert-manager-webhook-namecom \
   --namespace cert-manager \
   --set groupName=acme.namecom.io \
   --devel
+```
+
+### Option B: OCI registry (GHCR)
+
+No `helm repo add` needed — reference the chart directly:
+
+```bash
+helm install cert-manager-webhook-namecom \
+  oci://ghcr.io/jorgemoralespou/charts/cert-manager-webhook-namecom \
+  --namespace cert-manager \
+  --set groupName=acme.namecom.io
+```
+
+Install a specific version:
+
+```bash
+helm install cert-manager-webhook-namecom \
+  oci://ghcr.io/jorgemoralespou/charts/cert-manager-webhook-namecom \
+  --namespace cert-manager \
+  --set groupName=acme.namecom.io \
+  --version 1.2.3
+```
+
+Install the latest development build:
+
+```bash
+helm install cert-manager-webhook-namecom \
+  oci://ghcr.io/jorgemoralespou/charts/cert-manager-webhook-namecom \
+  --namespace cert-manager \
+  --set groupName=acme.namecom.io \
+  --version 0.1.0-dev.5   # replace with the desired dev build number
+```
+
+### Credentials in a non-default namespace
+
+By default the webhook can only read Secrets from the `cert-manager` namespace. If your credentials Secret lives elsewhere (e.g. cert-manager's `clusterResourceNamespace`), pass the namespace via `secretNamespaces`:
+
+```bash
+helm install cert-manager-webhook-namecom ... \
+  --set "secretNamespaces={cert-manager,educates-secrets}"
 ```
 
 The `groupName` must be a unique domain identifier you control. It is baked into the webhook and must match the value referenced in each Issuer configuration.
