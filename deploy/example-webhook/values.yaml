@@ -7,6 +7,13 @@ certManager:
   namespace: cert-manager
   serviceAccountName: cert-manager
 
+# Namespaces where the webhook is allowed to read Secrets containing DNS
+# provider credentials. Add any namespace where you store credentials,
+# including cert-manager's clusterResourceNamespace if it differs from
+# the release namespace.
+secretNamespaces:
+  - cert-manager
+
 image:
   repository: ghcr.io/jorgemoralespou/webhook-certmanager-namecom
   tag: latest

@@ -80,14 +80,16 @@ jobs:
         run: |
           if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
             VERSION="${GITHUB_REF_NAME#v}"
+            IMAGE_TAG="${VERSION}"
           else
             BASE=$(grep '^version:' deploy/example-webhook/Chart.yaml | awk '{print $2}')
             SHORT_SHA=$(git rev-parse --short HEAD)
             VERSION="${BASE}-dev.${SHORT_SHA}"
+            IMAGE_TAG="latest"
           fi
           sed -i "s/^version:.*/version: ${VERSION}/" deploy/example-webhook/Chart.yaml
           sed -i "s/^appVersion:.*/appVersion: \"${VERSION}\"/" deploy/example-webhook/Chart.yaml
-          sed -i "s|tag:.*|tag: \"${VERSION}\"|" deploy/example-webhook/values.yaml
+          sed -i "s|tag:.*|tag: \"${IMAGE_TAG}\"|" deploy/example-webhook/values.yaml
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1

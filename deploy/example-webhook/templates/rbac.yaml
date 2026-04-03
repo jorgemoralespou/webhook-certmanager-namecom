@@ -53,6 +53,46 @@ subjects:
     name: {{ include "example-webhook.fullname" . }}
     namespace: {{ .Release.Namespace }}
 ---
+# Grant the webhook permission to read Secrets (DNS provider credentials)
+# in each configured namespace.
+{{- range .Values.secretNamespaces }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "example-webhook.fullname" $ }}:secret-reader
+  namespace: {{ . | quote }}
+  labels:
+    app: {{ include "example-webhook.name" $ }}
+    chart: {{ include "example-webhook.chart" $ }}
+    release: {{ $.Release.Name }}
+    heritage: {{ $.Release.Service }}
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "example-webhook.fullname" $ }}:secret-reader
+  namespace: {{ . | quote }}
+  labels:
+    app: {{ include "example-webhook.name" $ }}
+    chart: {{ include "example-webhook.chart" $ }}
+    release: {{ $.Release.Name }}
+    heritage: {{ $.Release.Service }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ include "example-webhook.fullname" $ }}:secret-reader
+subjects:
+  - apiGroup: ""
+    kind: ServiceAccount
+    name: {{ include "example-webhook.fullname" $ }}
+    namespace: {{ $.Release.Namespace }}
+{{- end }}
+---
 # Grant cert-manager permission to validate using our apiserver
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole

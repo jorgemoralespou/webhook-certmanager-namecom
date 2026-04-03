@@ -24,6 +24,15 @@ helm repo update
 
 ### 2. Install the webhook
 
+By default the webhook can only read Secrets from the `cert-manager` namespace. If your credentials Secret lives elsewhere (e.g. cert-manager's `clusterResourceNamespace`), pass the namespace via `secretNamespaces`:
+
+```bash
+helm install cert-manager-webhook-namecom webhook-namecom/cert-manager-webhook-namecom \
+  --namespace cert-manager \
+  --set groupName=acme.namecom.io \
+  --set "secretNamespaces={cert-manager,educates-secrets}"
+```
+
 Install the latest stable release:
 
 ```bash
