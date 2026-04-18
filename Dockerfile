@@ -1,5 +1,5 @@
 # 1. Pin the builder stages to the runner's architecture using $BUILDPLATFORM
-FROM --platform=$BUILDPLATFORM golang:1.25-alpine AS build_deps
+FROM --platform=$BUILDPLATFORM golang:1.26-alpine AS build_deps
 
 RUN apk add --no-cache git
 
