@@ -24,7 +24,7 @@ RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -o webhook -ldflags
 
 # 4. The final stage does NOT use $BUILDPLATFORM. 
 # Docker Buildx will automatically pull the correct Alpine architecture based on the target platform.
-FROM alpine:3.23@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659
+FROM alpine:3.23@sha256:469c9ea410b9215eaee7976ba6c0639039b444be8e5d638f7abbada189971eb2
 
 RUN apk add --no-cache ca-certificates
 
